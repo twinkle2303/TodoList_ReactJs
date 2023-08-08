@@ -22,14 +22,19 @@ const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
   const onInputChange = (event) => {
     setInput(event.target.value);
   };
-
   const onFormSubmit = (event) => {
     event.preventDefault();
     if (!editTodo) {
-      setTodos([...todos, { id: uuidv4(), title: input, completed: false }]);
+      const newTodos = [
+        ...todos,
+        { id: uuidv4(), title: input, completed: false },
+      ];
+      setTodos(newTodos);
+      localStorage.setItem("todos", JSON.stringify(newTodos));
       setInput("");
     } else {
       updateTodo(input, editTodo.id, editTodo.completed);
+      localStorage.setItem("todos", JSON.stringify(todos));
     }
   };
   return (

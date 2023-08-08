@@ -1,21 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const TodoList = ({ todos, setTodos, setEditTodo }) => {
+  useEffect(() => {
+    const storedTodos = localStorage.getItem("todos");
+    if (storedTodos) {
+      setTodos(JSON.parse(storedTodos));
+    }
+  }, [setTodos]);
+
   const handleDelete = ({ id }) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
   };
+
   const handleComplete = (todo) => {
-    setTodos(
-      todos.map((item) => {
-        if (item.id === todo.id) {
-          return { ...item, completed: !item.completed };
-        }
-      })
-    );
+    const updatedTodos = todos.map((item) => {
+      if (item.id === todo.id) {
+        return { ...item, completed: !item.completed };
+      }
+      return item;
+    });
+    setTodos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
   };
   const handleEdit = ({ id }) => {
     const findTodo = todos.find((todo) => todo.id === id);
     setEditTodo(findTodo);
+    localStorage.setItem("todos", JSON.stringify(findTodo));
   };
   return (
     <div>
