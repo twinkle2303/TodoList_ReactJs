@@ -16,3 +16,5 @@ Remove tasks from your list with a click of the delete button, making task manag
 
 ## Local Storage:
 The app utilizes browser's local storage to persist your tasks across page refreshes, ensuring that your tasks are saved even when you close the browser.
+
+![image](https://github.com/twinkle2303/TodoList_ReactJs/assets/71099939/a5af748a-ac5a-4850-9eb2-c34cb5ce4c1c)
